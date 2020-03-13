@@ -10,10 +10,10 @@ class NavBar extends Component {
                 <Navbar bg="primary" variant="dark">
                     <Nav className="mr-auto">
                         {(isAuthenticated())
-                        ?
-                        <Nav.Link href="#">Logout</Nav.Link>
-                        :
-                        <Nav.Link href="#">Login</Nav.Link>
+                            ?
+                            <Nav.Link href="#">Logout</Nav.Link>
+                            :
+                            <Nav.Link href="#">Login</Nav.Link>
                         }
                     </Nav>
                     <Form inline>
