@@ -24,9 +24,9 @@ const register = (userInfo) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
         },
-        body: JSON.stringify(userInfo)
+        body: JSON.stringify(userInfo),
     })
         .then(res => res.json())
         .then(res => {

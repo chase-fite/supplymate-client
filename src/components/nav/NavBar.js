@@ -4,6 +4,10 @@ import { isAuthenticated, logout } from '../utility/simpleAuth'
 
 class NavBar extends Component {
 
+    // state = {
+    //     loggedIn: false
+    // }
+
     render() {
         return (
             <>
@@ -11,7 +15,7 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         {(isAuthenticated())
                             ?
-                            <Nav.Link onClick={logout}>Logout</Nav.Link>
+                            <Nav.Link onClick={logout} href="/login">Logout</Nav.Link>
                             :
                             <Nav.Link href="/login">Login</Nav.Link>
                         }

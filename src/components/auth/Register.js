@@ -5,12 +5,11 @@ import { register } from '../utility/simpleAuth'
 class Register extends Component {
 
     state = {
+        firstName: "",
+        lastName: "",
         email: "",
         userName: "",
-        lastName: "",
-        password: "",
-        firstName: "",
-        verifyPassword: ""
+        password: ""
     }
 
     handleInputChange = (evt) => {
@@ -32,11 +31,13 @@ class Register extends Component {
 
         register(newUser)
             .then(() => {
-                this.props.getProductTypesForNav()
+                this.props.refreshNavbar()
                 this.props.history.push("/")
             })
     }
 
+
+    // I need to setup a select menu and fetch for employee role
     render() {
         return (
             <>
@@ -63,7 +64,7 @@ class Register extends Component {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control id="password" onChange={this.handleInputChange} />
+                        <Form.Control id="password" type="password" onChange={this.handleInputChange} />
                     </Form.Group>
                     <Button onClick={this.handleRegister} variant="primary" type="submit">
                         Submit
