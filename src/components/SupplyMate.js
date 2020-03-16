@@ -4,11 +4,21 @@ import NavBar from './nav/NavBar'
 
 class SupplyMate extends Component {
 
+    state = {
+        loggedIn: false
+    }
+    
+    refreshNavbar = () => {
+        this.setState({
+            loggedIn: true
+        })
+    }
+
     render() {
         return (
             <>
                 <NavBar />
-                <ApplicationViews />
+                <ApplicationViews refreshNavbar={this.refreshNavbar} />
                 
             </>
         )

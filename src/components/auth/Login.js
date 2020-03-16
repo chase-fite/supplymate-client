@@ -8,7 +8,7 @@ class Login extends Component {
         userName: "",
         password: ""
     }
-  
+
     handleInputChange = (evt) => {
         let stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
@@ -17,16 +17,17 @@ class Login extends Component {
 
     handleLogin = (evt) => {
         evt.preventDefault()
-  
+
         const credentials = {
-          "username": this.state.userName,
-          "password": this.state.password
+            "username": this.state.userName,
+            "password": this.state.password
         }
-  
+
         login(credentials)
-        .then(() => {
-          this.props.history.push("/")
-        })
+            .then(() => {
+                this.props.refreshNavbar()
+                this.props.history.push("/")
+            })
     }
 
     render() {
@@ -35,12 +36,12 @@ class Login extends Component {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control id="userName" placeholder="Enter email" onChange={this.handleInputChange} />
+                        <Form.Control id="userName" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control id="password" placeholder="Password" onChange={this.handleInputChange} />
+                        <Form.Control id="password" type="password" onChange={this.handleInputChange} />
                     </Form.Group>
                     <Button onClick={this.handleLogin} variant="primary" type="submit">
                         Submit

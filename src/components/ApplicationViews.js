@@ -10,12 +10,12 @@ class ApplicationViews extends Component {
             <>
                 <Route
                     exact path="/login" render={props => {
-                        return <Login />
+                        return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
                     }}
                 />
                 <Route
                     exact path="/register" render={props => {
-                        return <Register />
+                        return <Register refreshNavbar={this.props.refreshNavbar} {...props} />
                     }}
                 />
             </>
