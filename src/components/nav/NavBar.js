@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
-import { isAuthenticated } from '../utility/simpleAuth'
+import { isAuthenticated, logout } from '../utility/simpleAuth'
 
 class NavBar extends Component {
 
@@ -11,9 +11,9 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         {(isAuthenticated())
                             ?
-                            <Nav.Link href="#">Logout</Nav.Link>
+                            <Nav.Link onClick={logout}>Logout</Nav.Link>
                             :
-                            <Nav.Link href="#">Login</Nav.Link>
+                            <Nav.Link href="/login">Login</Nav.Link>
                         }
                     </Nav>
                     <Form inline>
