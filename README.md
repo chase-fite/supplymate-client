@@ -18,4 +18,4 @@ https://github.com/chase-fite/supplymate-api
 
 ## ERD
 
-![supplymate ERD](supplymate-client/assets/supplymate-erd.png)
+![supplymate ERD](./assets/supplymate-erd.PNG)
