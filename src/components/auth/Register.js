@@ -8,6 +8,7 @@ class Register extends Component {
         firstName: "",
         lastName: "",
         email: "",
+        role_id: 1,
         userName: "",
         password: ""
     }
@@ -26,10 +27,11 @@ class Register extends Component {
             "last_name": this.state.lastName,
             "email": this.state.email,
             "username": this.state.userName,
-            "password": this.state.password
+            "password": this.state.password,
+            "role_id": this.state.role_id
         }
 
-        register(newUser)
+        register(newUser, this.state.role_id)
             .then(() => {
                 this.props.refreshNavbar()
                 this.props.history.push("/")
@@ -55,6 +57,11 @@ class Register extends Component {
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control id="email" onChange={this.handleInputChange} />
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Role</Form.Label>
+                        <Form.Control id="role_id" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
