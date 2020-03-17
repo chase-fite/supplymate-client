@@ -12,10 +12,10 @@
 
 ## API
 
-Please also clone down the backend part of this app and follow the instructions for setting up django for the full experience of this app.
+Please also clone down the back-end part of this app and follow the instructions for setting up django for the full experience of this app.
 
 https://github.com/chase-fite/supplymate-api
 
 ## ERD
 
-![supplymate ERD](./assets/supplymate-erd.png)
+![supplymate ERD](./assets/supplymate-erd.PNG)
