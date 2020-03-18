@@ -19,19 +19,6 @@ class ItemDetail extends Component {
         addressId: 0
     }
 
-    // **item format in the fetch**
-    // id: 1
-    // url: "http://localhost:8000/items/1"
-    // name: "Delo 400"
-    // description: "Delo 400 SDE SAE 15W-40"
-    // serial_number: "232983487"
-    // stock: 27
-    // quantity: 22
-    // item_type_id: 1
-    // address_id: 1
-    // storage_location: "Aisle 5, Shelf 1"
-    // price: "225.00"
-
     componentDidMount() {
         apiManager.getOne('items', this.props.match.params.itemId)
             .then(item => {
@@ -49,6 +36,11 @@ class ItemDetail extends Component {
             })
     }
 
+    handleDeleteItem = (id) => {
+        apiManager.delete('items', id)
+        .then(r => this.props.history.push('/inventory'))
+    }
+
     render() {
         return (
             <>
@@ -58,7 +50,7 @@ class ItemDetail extends Component {
                     </div>
                     <div className="flex item-detail-btn-container">
                         <Button className="item-detail-btn">Edit Item</Button>
-                        <Button className="item-detail-btn">Delete Item</Button>
+                        <Button className="item-detail-btn" onClick={() => this.handleDeleteItem(this.props.match.params.itemId)}>Delete Item</Button>
                     </div>
                 </div>
 
