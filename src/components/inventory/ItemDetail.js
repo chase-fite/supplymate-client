@@ -36,6 +36,10 @@ class ItemDetail extends Component {
             })
     }
 
+    renderEditItem = (id) => {
+        this.props.history.push(`/inventory/editItem/${id}`)
+    }
+
     handleDeleteItem = (id) => {
         apiManager.delete('items', id)
         .then(r => this.props.history.push('/inventory'))
@@ -49,7 +53,7 @@ class ItemDetail extends Component {
                         <img className="image" src={deloImage} alt="delo 400" />
                     </div>
                     <div className="flex item-detail-btn-container">
-                        <Button className="item-detail-btn">Edit Item</Button>
+                        <Button className="item-detail-btn" onClick={() => this.renderEditItem(this.props.match.params.itemId)}>Edit Item</Button>
                         <Button className="item-detail-btn" onClick={() => this.handleDeleteItem(this.props.match.params.itemId)}>Delete Item</Button>
                     </div>
                 </div>
