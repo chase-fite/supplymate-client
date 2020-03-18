@@ -1,32 +1,11 @@
 import React, { Component } from 'react'
-import { Button, Table, Form, Col, Row } from 'react-bootstrap'
+import { Button, Form, Col, Row } from 'react-bootstrap'
 import apiManager from '../utility/apiManager'
 import './Inventory.css'
 import deloImage from '../../images/delo-400.jpeg'
 
 
 class AddItemForm extends Component {
-
-    state = {
-        
-    }
-
-    // **item format in the fetch**
-    // id: 1
-    // url: "http://localhost:8000/items/1"
-    // name: "Delo 400"
-    // description: "Delo 400 SDE SAE 15W-40"
-    // serial_number: "232983487"
-    // stock: 27
-    // quantity: 22
-    // item_type_id: 1
-    // address_id: 1
-    // storage_location: "Aisle 5, Shelf 1"
-    // price: "225.00"
-
-    componentDidMount() {
-        
-    }
 
     handleAddItem = () => {
         // I need to check if item type already exists and if it doesn't then i need to create a new one
