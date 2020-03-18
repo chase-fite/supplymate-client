@@ -15,7 +15,10 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         {(isAuthenticated())
                             ?
-                            <Nav.Link onClick={logout} href="/login">Logout</Nav.Link>
+                            <>
+                                <Nav.Link href="/inventory">Inventory</Nav.Link>
+                                <Nav.Link onClick={logout} href="/login">Logout</Nav.Link>
+                            </>
                             :
                             <Nav.Link href="/login">Login</Nav.Link>
                         }

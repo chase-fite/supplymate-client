@@ -34,7 +34,7 @@ class Register extends Component {
         register(newUser, this.state.role_id)
             .then(() => {
                 this.props.refreshNavbar()
-                this.props.history.push("/")
+                this.props.history.push("/inventory")
             })
     }
 
@@ -46,32 +46,32 @@ class Register extends Component {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control id="firstName" onChange={this.handleInputChange} />
+                        <input id="firstName" type="text" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control id="lastName" onChange={this.handleInputChange} />
+                        <input id="lastName" type="text" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control id="email" onChange={this.handleInputChange} />
+                        <input id="email" type="text" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Role</Form.Label>
-                        <Form.Control id="role_id" onChange={this.handleInputChange} />
+                        <input id="role_id" type="text" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control id="userName" onChange={this.handleInputChange} />
+                        <input id="userName" type="text" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control id="password" type="password" onChange={this.handleInputChange} />
+                        <input id="password" type="password" onChange={this.handleInputChange} />
                     </Form.Group>
                     <Button onClick={this.handleRegister} variant="primary" type="submit">
                         Submit

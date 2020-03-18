@@ -26,7 +26,7 @@ class Login extends Component {
         login(credentials)
             .then(() => {
                 this.props.refreshNavbar()
-                this.props.history.push("/")
+                this.props.history.push("/inventory")
             })
     }
 
@@ -36,12 +36,12 @@ class Login extends Component {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control id="userName" onChange={this.handleInputChange} />
+                        <input id="userName" type="text" onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control id="password" type="password" onChange={this.handleInputChange} />
+                        <input id="password" type="password" onChange={this.handleInputChange} />
                     </Form.Group>
                     <Button onClick={this.handleLogin} variant="primary" type="submit">
                         Submit
