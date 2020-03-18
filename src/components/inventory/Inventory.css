@@ -11,5 +11,18 @@
 }
 
 .item-detail-btn {
+    margin: 5px;
+}
+
+.image {
+    width: 250px;
     margin: 10px;
+}
+
+Button {
+    height: 38px;
+}
+
+.item-detail-btn-container {
+    align-items: flex-end;
 }

@@ -19,11 +19,15 @@ class ItemList extends Component {
         this.props.history.push(`/inventory/${id}`)
     }
 
+    renderAddItemForm = () => {
+        this.props.history.push(`/inventory/addItem`)
+    }
+
     render() {
         return (
             <>
                 <h2 className="inv-title">Inventory</h2>
-                <Button className="inv-add-item-button">Add Item</Button>
+                <Button className="inv-add-item-button" onClick={this.renderAddItemForm}>Add Item</Button>
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
