@@ -5,3 +5,11 @@
 .inv-add-item-button {
     margin-bottom: 5px;
 }
+
+.flex {
+    display: flex;
+}
+
+.item-detail-btn {
+    margin: 10px;
+}

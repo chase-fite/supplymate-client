@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import Login from './auth/Login'
 import Register from './auth/Register'
 import ItemList from './inventory/ItemList'
+import ItemDetail from './inventory/ItemDetail'
 
 class ApplicationViews extends Component {
 
@@ -22,6 +23,11 @@ class ApplicationViews extends Component {
                 <Route
                     exact path="/inventory" render={props => {
                         return <ItemList {...props} />
+                    }}
+                />
+                <Route
+                    exact path="/inventory/:itemId(\d+)" render={props => {
+                        return <ItemDetail {...props} />
                     }}
                 />
             </>

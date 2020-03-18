@@ -15,6 +15,10 @@ class ItemList extends Component {
             .then(items => this.setState({ items: items }))
     }
 
+    renderItemDetail = (id) => {
+        this.props.history.push(`/inventory/${id}`)
+    }
+
     render() {
         return (
             <>
@@ -26,8 +30,8 @@ class ItemList extends Component {
                             <th>Stock</th>
                             <th>Qty</th>
                             <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
+                            {/* <th>Type</th>
+                            <th>Description</th> */}
                             <th>SN</th>
                             <th>Price</th>
                             <th>Storage Loc.</th>
@@ -37,19 +41,17 @@ class ItemList extends Component {
                     <tbody>
                         {this.state.items.map(item => {
                             return (
-                                <>
-                                    <tr>
-                                        <td>{item.stock}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>{item.name}</td>
-                                        <td>Item Type Placeholder</td>
-                                        <td>{item.description}</td>
-                                        <td>{item.serial_number}</td>
-                                        <td>{item.price}</td>
-                                        <td>{item.storage_location}</td>
-                                        <td>301 Address Placeholder, Nashville, TN 37216</td>
-                                    </tr>
-                                </>
+                                <tr key={item.id} onClick={() => this.renderItemDetail(item.id)}>
+                                    <td>{item.stock}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.name}</td>
+                                    {/* <td>Item Type Placeholder</td>
+                                    <td>{item.description}</td> */}
+                                    <td>{item.serial_number}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.storage_location}</td>
+                                    <td>301 Address Placeholder, Nashville, TN 37216</td>
+                                </tr>
                             )
                         })}
                     </tbody>
