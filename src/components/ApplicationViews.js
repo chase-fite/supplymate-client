@@ -5,6 +5,7 @@ import Register from './auth/Register'
 import ItemList from './inventory/ItemList'
 import ItemDetail from './inventory/ItemDetail'
 import AddItemForm from './inventory/AddItemForm'
+import EditItemForm from './inventory/EditItemForm'
 
 class ApplicationViews extends Component {
 
@@ -34,6 +35,11 @@ class ApplicationViews extends Component {
                 <Route
                     exact path="/inventory/addItem" render={props => {
                         return <AddItemForm {...props} />
+                    }}
+                />
+                <Route
+                    exact path="/inventory/editItem/:itemId(\d+)" render={props => {
+                        return <EditItemForm {...props} />
                     }}
                 />
             </>
