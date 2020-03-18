@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import apiManager from '../utility/apiManager'
+import deloImage from '../../images/delo-400.jpeg'
 import './Inventory.css'
 
 
@@ -53,9 +54,9 @@ class ItemDetail extends Component {
             <>
                 <div className="flex">
                     <div>
-                        <img src={`../../assets/delo-400.jpeg`} alt="delo 400" />
+                        <img className="image" src={deloImage} alt="delo 400" />
                     </div>
-                    <div className="flex">
+                    <div className="flex item-detail-btn-container">
                         <Button className="item-detail-btn">Edit Item</Button>
                         <Button className="item-detail-btn">Delete Item</Button>
                     </div>
@@ -72,7 +73,7 @@ class ItemDetail extends Component {
                             <td>{this.state.quantity}</td>
                         </tr>
                         <tr>
-                            <td>Type</td>
+                            <td>Type (id for now)</td>
                             <td>{this.state.typeId}</td>
                         </tr>
                         <tr>
@@ -92,7 +93,7 @@ class ItemDetail extends Component {
                             <td>{this.state.storageLocation}</td>
                         </tr>
                         <tr>
-                            <td>Address</td>
+                            <td>Address (id for now)</td>
                             <td>{this.state.addressId}</td>
                         </tr>
                     </tbody>
