@@ -2,25 +2,15 @@ import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { login } from '../utility/simpleAuth'
 
+
 class Login extends Component {
-
-    state = {
-        userName: "",
-        password: ""
-    }
-
-    handleInputChange = (evt) => {
-        let stateToChange = {}
-        stateToChange[evt.target.id] = evt.target.value
-        this.setState(stateToChange)
-    }
 
     handleLogin = (evt) => {
         evt.preventDefault()
 
         const credentials = {
-            "username": this.state.userName,
-            "password": this.state.password
+            "username": this.refs.username.value,
+            "password": this.refs.password.value
         }
 
         login(credentials)
@@ -36,12 +26,12 @@ class Login extends Component {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <input id="userName" type="text" onChange={this.handleInputChange} />
+                        <Form.Control ref="username" type="text" />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <input id="password" type="password" onChange={this.handleInputChange} />
+                        <Form.Control ref="password" type="password" />
                     </Form.Group>
                     <Button onClick={this.handleLogin} variant="primary" type="submit">
                         Submit
