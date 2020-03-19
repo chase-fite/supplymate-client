@@ -11,12 +11,12 @@ class ItemDetail extends Component {
         stock: 0,
         quantity: 0,
         name: "",
-        typeId: 0,
+        type: 0,
         description: "",
         serialNumber: "",
         price: 0,
         storageLocation: "",
-        addressId: 0
+        address: 0
     }
 
     componentDidMount() {
@@ -26,12 +26,12 @@ class ItemDetail extends Component {
                     stock: item.stock,
                     quantity: item.quantity,
                     name: item.name,
-                    typeId: item.item_type_id,
+                    type: item.item_type,
                     description: item.description,
                     serialNumber: item.serial_number,
                     price: item.price,
                     storageLocation: item.storage_location,
-                    addressId: item.address_id
+                    address: item.address
                 })
             })
     }
@@ -69,8 +69,8 @@ class ItemDetail extends Component {
                             <td>{this.state.quantity}</td>
                         </tr>
                         <tr>
-                            <td>Type (id for now)</td>
-                            <td>{this.state.typeId}</td>
+                            <td>Type</td>
+                            <td>{this.state.type.name}</td>
                         </tr>
                         <tr>
                             <td>Description</td>
@@ -89,8 +89,8 @@ class ItemDetail extends Component {
                             <td>{this.state.storageLocation}</td>
                         </tr>
                         <tr>
-                            <td>Address (id for now)</td>
-                            <td>{this.state.addressId}</td>
+                            <td>Address</td>
+                            <td>{this.state.address.street}, {this.state.address.city}, {this.state.address.state} {this.state.address.zip_code}</td>
                         </tr>
                     </tbody>
                 </Table>
