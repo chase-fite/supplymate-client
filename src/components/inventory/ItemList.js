@@ -50,7 +50,7 @@ class ItemList extends Component {
                                     <td>{item.serial_number}</td>
                                     <td>{item.price}</td>
                                     <td>{item.storage_location}</td>
-                                    <td>301 Address Placeholder, Nashville, TN 37216</td>
+                                    <td>{item.address.street}, {item.address.city}, {item.address.state} {item.address.zip_code}</td>
                                 </tr>
                             )
                         })}
