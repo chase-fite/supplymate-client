@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 import { login } from '../utility/simpleAuth'
 
 
@@ -26,13 +26,18 @@ class Login extends Component {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control ref="username" type="text" />
+                        <Col sm="6">
+                            <Form.Control ref="username" type="text" />
+                        </Col>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control ref="password" type="password" />
+                        <Col sm="6">
+                            <Form.Control ref="password" type="password" />
+                        </Col>
                     </Form.Group>
+
                     <Button onClick={this.handleLogin} variant="primary" type="submit">
                         Submit
                     </Button>

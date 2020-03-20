@@ -93,7 +93,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Name
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="name" />
                                 </Col>
@@ -102,7 +102,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Stock
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="stock" />
                                 </Col>
@@ -111,7 +111,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Quantity
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="quantity" />
                                 </Col>
@@ -120,7 +120,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Type
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <select className="address-select" ref="itemTypeId">
                                         {this.state.itemTypeList.map(itemType => {
@@ -135,7 +135,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Description
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="description" />
                                 </Col>
@@ -144,7 +144,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Serial Number
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="serialNumber" />
                                 </Col>
@@ -153,7 +153,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Price
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="price" />
                                 </Col>
@@ -162,7 +162,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Storage Location
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <Form.Control type="text" ref="storageLocation" />
                                 </Col>
@@ -171,7 +171,7 @@ class AddItemForm extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Address
-                        </Form.Label>
+                                </Form.Label>
                                 <Col sm="6">
                                     <select className="address-select" ref="addressId">
                                         {this.state.addressList.map(address => {
