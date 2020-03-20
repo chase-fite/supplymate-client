@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 import { register } from '../utility/simpleAuth'
+import './Login.css'
 
 
 class Register extends Component {
@@ -29,35 +30,51 @@ class Register extends Component {
         return (
             <>
                 <Form>
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control ref="firstName" type="text" onChange={this.handleInputChange} />
+                        <Col sm="6">
+                            <Form.Control ref="firstName" type="text" onChange={this.handleInputChange} />
+                        </Col>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group>
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control ref="lastName" type="text" onChange={this.handleInputChange} />
+                        <Col sm="6">
+                            <Form.Control ref="lastName" type="text" onChange={this.handleInputChange} />
+                        </Col>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group>
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control ref="email" type="text" onChange={this.handleInputChange} />
+                        <Col sm="6">
+                            <Form.Control ref="email" type="text" onChange={this.handleInputChange} />
+                        </Col>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group>
                         <Form.Label>Role</Form.Label>
-                        <Form.Control ref="roleId" type="text" onChange={this.handleInputChange} />
+                        <Col sm="6">
+                            <select className="role-select" ref="roleId">
+                                <option value={1}>Logistics</option>
+                                <option value={2}>Remote</option>
+                            </select>
+                        </Col>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group>
                         <Form.Label>Username</Form.Label>
-                        <Form.Control ref="userName" type="text" onChange={this.handleInputChange} />
+                        <Col sm="6">
+                            <Form.Control ref="userName" type="text" onChange={this.handleInputChange} />
+                        </Col>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control ref="password" type="password" onChange={this.handleInputChange} />
+                        <Col sm="6">
+                            <Form.Control ref="password" type="password" onChange={this.handleInputChange} />
+                        </Col>
                     </Form.Group>
+                    
                     <Button onClick={this.handleRegister} variant="primary" type="submit">
                         Submit
                     </Button>

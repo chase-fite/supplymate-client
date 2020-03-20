@@ -1,0 +1,10 @@
+.role-select {
+    height: 38px;
+    width: 99.7%;
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+}
+
+.col-sm-6 {
+    padding-left: 0px !important;
+}
