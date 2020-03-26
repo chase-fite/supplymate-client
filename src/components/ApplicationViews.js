@@ -9,6 +9,8 @@ import EditItemForm from './inventory/EditItemForm'
 import SupplyRequests from './supplyRequests/SupplyRequests'
 import CreateSupplyRequestForm from './supplyRequests/CreateSupplyRequestForm'
 import { isAuthenticated } from './utility/simpleAuth'
+import SupplyRequestDetail from './supplyRequests/SupplyRequestDetail'
+
 
 class ApplicationViews extends Component {
 
@@ -85,6 +87,15 @@ class ApplicationViews extends Component {
                             exact path="/supplyrequests" render={props => {
                                 if(isAuthenticated()) {
                                     return <SupplyRequests {...props} />
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/supplyrequests/:supplyRequestId(\d+)" render={props => {
+                                if(isAuthenticated()) {
+                                    return <SupplyRequestDetail {...props} />
                                 } else {
                                     return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
                                 }

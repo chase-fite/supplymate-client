@@ -50,22 +50,24 @@ class SupplyRequestCard extends Component {
             })
     }
 
-    renderSupplyRequestDetails = () => {
-        this.props.history.push('/inventory')
+    renderSupplyRequestDetails = (id) => {
+        this.props.history.push(`/supplyrequests/${id}`)
     }
 
     render() {
         return (
             <Card className="sr-card">
-                <Card.Header className="sr-card-header">
-                    <div>Requester: {this.props.supplyRequest.employee.user.first_name} {this.props.supplyRequest.employee.user.last_name}</div>
-                    <div>Deliver By: {formatDateTime(this.props.supplyRequest.delivery_date_time)}</div>
-                    <div>Address: {this.props.supplyRequest.address.street}, {this.props.supplyRequest.address.city}, {this.props.supplyRequest.address.state} {this.props.supplyRequest.address.zip_code}</div>
-                    <div>Status: {this.props.supplyRequest.status.name}</div>
+                <Card.Header className="sr-card-header" onClick={() => this.renderSupplyRequestDetails(this.state.supplyRequest.id)}>
+                    <div className="src-header">
+                        <div>Requester: {this.props.supplyRequest.employee.user.first_name} {this.props.supplyRequest.employee.user.last_name}</div>
+                        <div>Deliver By: {formatDateTime(this.props.supplyRequest.delivery_date_time)}</div>
+                        <div>Status: {this.props.supplyRequest.status.name}</div>
+                    </div>
+                    <div className="src-header-address">Address: {this.props.supplyRequest.address.street}, {this.props.supplyRequest.address.city}, {this.props.supplyRequest.address.state} {this.props.supplyRequest.address.zip_code}</div>
                 </Card.Header>
                 <Card.Body className="sr-card-body">
-                    {/* <div className="sr-click-notice">(Click for supply request details)</div> */}
-                    <div className="sr-item-container">
+                    <div className="sr-click-notice" onClick={() => this.renderSupplyRequestDetails(this.state.supplyRequest.id)}>(Click for supply request details)</div>
+                    <div className="sr-item-container" onClick={() => this.renderSupplyRequestDetails(this.state.supplyRequest.id)}>
                         {this.state.itemCols.map((col, indx) => {
                             return (
                                 <div className="sr-item-col" key={indx}>
