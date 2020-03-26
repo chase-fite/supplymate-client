@@ -16,7 +16,7 @@ class SupplyRequestCard extends Component {
     componentDidMount() {
         apiManager.get(`supplyrequestitems?sr_id=${this.props.supplyRequest.id}`)
             .then(supplyRequestItems => {
-                console.log('supply request items fetch: ', supplyRequestItems)
+                // console.log('supply request items fetch: ', supplyRequestItems)
 
                 let counter = 0
                 let tempColList = []
@@ -85,9 +85,9 @@ class SupplyRequestCard extends Component {
                             <textarea className="sr-note" placeholder="Leave a note"></textarea>
                         </div>
                         <div className="sr-button">
-                            <Button>Approve</Button>
+                            {/* <Button>Approve</Button>
                             <Button>Modify</Button>
-                            <Button>Cancel</Button>
+                            <Button>Cancel</Button> */}
                         </div>
                     </div>
                 </Card.Body>

@@ -33,7 +33,14 @@ class SupplyRequests extends Component {
         return (
             <div className="sr-container">
                 <h2 className="sr-title">Pending Supply Requests</h2>
-                <Button onClick={this.renderCreateSupplyRequestForm}>Create Supply Request</Button>
+                {
+                    (JSON.parse(sessionStorage.getItem('user')).role === "Remote")
+                    ?
+                    <Button onClick={this.renderCreateSupplyRequestForm}>Create Supply Request</Button>
+                    :
+                    <></>
+                }
+                
 
                 {this.state.supplyRequests.map((supplyRequest, indx) => {
                     return (
