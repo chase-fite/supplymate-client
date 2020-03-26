@@ -9,6 +9,7 @@
 
 .sr-card-header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding-top: 5px !important;
     padding-bottom: 5px !important;
@@ -154,4 +155,19 @@ td {
 .sr-address-input-container {
     margin-top: 10px;
     justify-content: center;
+}
+
+.srd-header .src-header {
+    justify-content: space-between;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.srd-header-address .src-header-address {
+    margin-left: 20px;
+}
+
+.src-header {
+    display: flex;
+    justify-content: space-between;
 }
