@@ -60,7 +60,7 @@ class AddItemForm extends Component {
         })
     }
 
-    returnToEditItem = () => {
+    returnToAddItem = () => {
         apiManager.get('itemtypes')
             .then(itemTypes => {
                 apiManager.get('addresses')
@@ -77,9 +77,9 @@ class AddItemForm extends Component {
     view = (mode) => {
         switch (mode) {
             case 'addAddress':
-                return <ManageAddresses returnToEditItem={this.returnToEditItem} />
+                return <ManageAddresses returnToEditItem={this.returnToAddItem} />
             case 'addItemType':
-                return <ManageItemTypes returnToEditItem={this.returnToEditItem} />
+                return <ManageItemTypes returnToEditItem={this.returnToAddItem} />
             default:
                 return (
                     <>
@@ -184,6 +184,7 @@ class AddItemForm extends Component {
                             </Form.Group>
 
                             <Button onClick={this.handleAddItem}>Submit</Button>
+                            <Button onClick={() => this.props.history.push('/inventory')}>Cancel</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddAddress}>Add Address</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddItemType}>Add Item Type</Button>
                         </Form>

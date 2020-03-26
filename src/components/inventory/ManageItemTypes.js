@@ -124,6 +124,14 @@ class ManageAddresses extends Component {
                     </Form.Group>
 
                     <Button className="item-detail-btn" onClick={this.handleAddItemType}>Save</Button>
+                    <Button className="item-detail-btn" onClick={() => {
+                        if(this.props.returnToEditItem) {
+                            this.props.returnToEditItem()
+                        }
+                        else {
+                            this.props.returnToAddItem()
+                        }
+                    }}>Cancel</Button>
                 </Form>
             </>
         )
