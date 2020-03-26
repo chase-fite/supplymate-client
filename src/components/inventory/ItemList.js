@@ -48,7 +48,7 @@ class ItemList extends Component {
                                     <td>{item.quantity}</td>
                                     <td>{item.name}</td>
                                     <td>{item.serial_number}</td>
-                                    <td>{item.price}</td>
+                                    <td>${item.price}</td>
                                     <td>{item.storage_location}</td>
                                     <td>{item.address.street}, {item.address.city}, {item.address.state} {item.address.zip_code}</td>
                                 </tr>

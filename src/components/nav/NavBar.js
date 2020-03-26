@@ -11,12 +11,13 @@ class NavBar extends Component {
     render() {
         return (
             <>
-                <Navbar bg="primary" variant="dark">
+                <Navbar sticky="top" bg="primary" variant="dark">
                     <Nav className="mr-auto">
                         {(isAuthenticated())
                             ?
                             <>
                                 <Nav.Link href="/inventory">Inventory</Nav.Link>
+                                <Nav.Link href="/supplyrequests">Supply Requests</Nav.Link>
                                 <Nav.Link onClick={logout} href="/login">Logout</Nav.Link>
                             </>
                             :

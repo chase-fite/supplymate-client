@@ -200,6 +200,7 @@ class EditItemForm extends Component {
                             </Form.Group>
 
                             <Button className="item-detail-btn" onClick={this.handleUpdateItem}>Save</Button>
+                            <Button onClick={() => this.props.history.push(`/inventory/${this.state.id}`)}>Cancel</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddAddress}>Manage Addresses</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddItemType}>Manage Item Types</Button>
                         </Form>

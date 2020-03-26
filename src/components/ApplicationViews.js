@@ -6,6 +6,8 @@ import ItemList from './inventory/ItemList'
 import ItemDetail from './inventory/ItemDetail'
 import AddItemForm from './inventory/AddItemForm'
 import EditItemForm from './inventory/EditItemForm'
+import SupplyRequests from './supplyRequests/SupplyRequests'
+import CreateSupplyRequestForm from './supplyRequests/CreateSupplyRequestForm'
 
 class ApplicationViews extends Component {
 
@@ -40,6 +42,16 @@ class ApplicationViews extends Component {
                 <Route
                     exact path="/inventory/editItem/:itemId(\d+)" render={props => {
                         return <EditItemForm {...props} />
+                    }}
+                />
+                <Route
+                    exact path="/supplyrequests" render={props => {
+                        return <SupplyRequests {...props} />
+                    }}
+                />
+                <Route
+                    exact path="/supplyrequests/create" render={props => {
+                        return <CreateSupplyRequestForm {...props} />
                     }}
                 />
             </>

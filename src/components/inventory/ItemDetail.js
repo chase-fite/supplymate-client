@@ -82,7 +82,7 @@ class ItemDetail extends Component {
                         </tr>
                         <tr>
                             <td>Price</td>
-                            <td>{this.state.price}</td>
+                            <td>${this.state.price}</td>
                         </tr>
                         <tr>
                             <td>Storage Location</td>
