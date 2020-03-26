@@ -7,12 +7,18 @@ import './Inventory.css'
 class ItemList extends Component {
 
     state = {
-        items: []
+        items: [],
+        user: {}
     }
 
     componentDidMount() {
         apiManager.get('items')
-            .then(items => this.setState({ items: items }))
+            .then(items => {
+                this.setState({
+                    items: items,
+                    user: JSON.parse(sessionStorage.getItem('user'))
+                })
+            })
     }
 
     renderItemDetail = (id) => {
@@ -27,7 +33,13 @@ class ItemList extends Component {
         return (
             <>
                 <h2 className="inv-title">Inventory</h2>
-                <Button className="inv-add-item-button" onClick={this.renderAddItemForm}>Add Item</Button>
+                {
+                    (this.state.user.role === "Logistics")
+                    ?
+                    <Button className="inv-add-item-button" onClick={this.renderAddItemForm}>Add Item</Button>
+                    :
+                    <></>
+                }
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>

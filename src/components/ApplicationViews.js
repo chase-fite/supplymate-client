@@ -8,52 +8,101 @@ import AddItemForm from './inventory/AddItemForm'
 import EditItemForm from './inventory/EditItemForm'
 import SupplyRequests from './supplyRequests/SupplyRequests'
 import CreateSupplyRequestForm from './supplyRequests/CreateSupplyRequestForm'
+import { isAuthenticated } from './utility/simpleAuth'
 
 class ApplicationViews extends Component {
+
+    state = {
+        user: {}
+    }
+
+    componentDidMount() {
+        this.setState({
+            user: JSON.parse(sessionStorage.getItem('user'))
+        })
+    }
 
     render() {
         return (
             <>
-                <Route
-                    exact path="/login" render={props => {
-                        return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/register" render={props => {
-                        return <Register refreshNavbar={this.props.refreshNavbar} {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/inventory" render={props => {
-                        return <ItemList {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/inventory/:itemId(\d+)" render={props => {
-                        return <ItemDetail {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/inventory/addItem" render={props => {
-                        return <AddItemForm {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/inventory/editItem/:itemId(\d+)" render={props => {
-                        return <EditItemForm {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/supplyrequests" render={props => {
-                        return <SupplyRequests {...props} />
-                    }}
-                />
-                <Route
-                    exact path="/supplyrequests/create" render={props => {
-                        return <CreateSupplyRequestForm {...props} />
-                    }}
-                />
+                {
+                    (this.state.user === {})
+                    ?
+                    <></>
+                    :
+                    <>
+                        <Route
+                            exact path="/login" render={props => {
+                                return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                            }}
+                        />
+                        <Route
+                            exact path="/register" render={props => {
+                                return <Register refreshNavbar={this.props.refreshNavbar} {...props} />
+                            }}
+                        />
+                        <Route
+                            exact path="/inventory" render={props => {
+                                if(isAuthenticated()) {
+                                    return <ItemList {...props} />
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/inventory/:itemId(\d+)" render={props => {
+                                if(isAuthenticated()) {
+                                    return <ItemDetail {...props} />
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/inventory/addItem" render={props => {
+                                if(isAuthenticated() && this.state.user.role === "Logistics") {
+                                    return <AddItemForm {...props} />
+                                } else if(isAuthenticated() && this.state.user.role === "Remote") {
+                                    return <></>
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/inventory/editItem/:itemId(\d+)" render={props => {
+                                if(isAuthenticated() && this.state.user.role === "Logistics") {
+                                    return <EditItemForm {...props} />
+                                } else if(isAuthenticated() && this.state.user.role === "Remote") {
+                                    return <></>
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/supplyrequests" render={props => {
+                                if(isAuthenticated()) {
+                                    return <SupplyRequests {...props} />
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/supplyrequests/create" render={props => {
+                                if(isAuthenticated() && this.state.user.role === "Remote") {
+                                    return <CreateSupplyRequestForm {...props} />
+                                } else if(isAuthenticated() && this.state.user.role === "Logistics") {
+                                    return <></>
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                    </>
+                }
             </>
         )
     }
