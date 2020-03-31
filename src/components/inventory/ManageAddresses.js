@@ -167,7 +167,7 @@ class ManageAddresses extends Component {
                         else {
                             this.props.returnToAddItem()
                         }
-                    }}>Cancel</Button>
+                    }}>Back</Button>
                 </Form>
             </>
         )

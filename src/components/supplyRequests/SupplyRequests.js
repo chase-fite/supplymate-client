@@ -8,7 +8,8 @@ import { Button } from 'react-bootstrap'
 class SupplyRequests extends Component {
 
     state = {
-        supplyRequests: []
+        supplyRequests: [],
+        user: {}
     }
 
     componentDidMount() {
@@ -16,7 +17,8 @@ class SupplyRequests extends Component {
         .then(supplyrequests => {
             // console.log('supply requests: ', supplyrequests)
             this.setState({
-                supplyRequests: supplyrequests
+                supplyRequests: supplyrequests,
+                user: JSON.parse(sessionStorage.getItem('user'))
             })
         })
     }

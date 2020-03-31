@@ -16,6 +16,7 @@ class Login extends Component {
         login(credentials)
             .then(() => {
                 this.props.refreshNavbar()
+                this.props.updateAVState()
                 this.props.history.push("/inventory")
             })
     }

@@ -157,13 +157,13 @@ td {
     justify-content: center;
 }
 
-.srd-header .src-header {
+.srd-header, .src-header {
     justify-content: space-between;
     margin-right: 20px;
     margin-left: 20px;
 }
 
-.srd-header-address .src-header-address {
+.srd-header-address, .src-header-address {
     margin-left: 20px;
 }
 

@@ -55,19 +55,23 @@ class ItemDetail extends Component {
                     <div className="flex item-detail-btn-container">
                         {
                             (JSON.parse(sessionStorage.getItem('user')).role === "Logistics")
-                            ?
-                            <>
-                                <Button className="item-detail-btn" onClick={() => this.renderEditItem(this.props.match.params.itemId)}>Edit Item</Button>
-                                <Button className="item-detail-btn" onClick={() => this.handleDeleteItem(this.props.match.params.itemId)}>Delete Item</Button>
-                            </>
-                            :
-                            <></>
+                                ?
+                                <>
+                                    <Button className="item-detail-btn" onClick={() => this.renderEditItem(this.props.match.params.itemId)}>Edit Item</Button>
+                                    <Button className="item-detail-btn" onClick={() => this.handleDeleteItem(this.props.match.params.itemId)}>Delete Item</Button>
+                                </>
+                                :
+                                <></>
                         }
                     </div>
                 </div>
 
                 <Table striped bordered hover size="sm">
                     <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>{this.state.name}</td>
+                        </tr>
                         <tr>
                             <td>Stock</td>
                             <td>{this.state.stock}</td>

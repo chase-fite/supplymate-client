@@ -85,9 +85,30 @@ class EditItemForm extends Component {
     }
 
     returnToEditItem = () => {
-        this.setState({
-            mode: ''
-        })
+        apiManager.getOne('items', this.props.match.params.itemId)
+            .then(item => {
+                apiManager.get('addresses')
+                    .then(addresses => {
+                        apiManager.get('itemtypes')
+                            .then(itemTypes => {
+                                this.setState({
+                                    id: item.id,
+                                    stock: item.stock,
+                                    quantity: item.quantity,
+                                    name: item.name,
+                                    itemTypeId: item.item_type_id,
+                                    description: item.description,
+                                    serialNumber: item.serial_number,
+                                    price: item.price,
+                                    storageLocation: item.storage_location,
+                                    addressId: item.address_id,
+                                    addressList: addresses,
+                                    itemTypeList: itemTypes,
+                                    mode: ''
+                                })
+                            })
+                    })
+            })
     }
 
     view = (mode) => {
@@ -200,7 +221,7 @@ class EditItemForm extends Component {
                             </Form.Group>
 
                             <Button className="item-detail-btn" onClick={this.handleUpdateItem}>Save</Button>
-                            <Button onClick={() => this.props.history.push(`/inventory/${this.state.id}`)}>Cancel</Button>
+                            <Button onClick={() => this.props.history.push(`/inventory/${this.state.id}`)}>Back</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddAddress}>Manage Addresses</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddItemType}>Manage Item Types</Button>
                         </Form>
