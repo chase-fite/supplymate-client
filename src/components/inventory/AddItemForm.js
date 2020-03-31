@@ -83,13 +83,13 @@ class AddItemForm extends Component {
             default:
                 return (
                     <>
-                        <div className="flex">
+                        {/* <div className="flex">
                             <div>
                                 <img className="image" src={deloImage} alt="delo 400" />
                             </div>
-                        </div>
+                        </div> */}
 
-                        <Form>
+                        <Form className="inv-add-item-form">
                             <Form.Group as={Row}>
                                 <Form.Label column sm="2">
                                     Name
@@ -183,8 +183,8 @@ class AddItemForm extends Component {
                                 </Col>
                             </Form.Group>
 
-                            <Button onClick={this.handleAddItem}>Submit</Button>
-                            <Button onClick={() => this.props.history.push('/inventory')}>Cancel</Button>
+                            <Button onClick={this.handleAddItem}>Save</Button>
+                            <Button onClick={() => this.props.history.push('/inventory')}>Back</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddAddress}>Add Address</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddItemType}>Add Item Type</Button>
                         </Form>

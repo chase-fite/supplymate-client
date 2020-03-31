@@ -40,7 +40,7 @@ input[type=text]:focus, textarea:focus, select:focus, Button:focus {
     border: 1px solid #007bff;
 }
 
-tr:hover {
+tbody > tr:hover {
     color: #007bff !important;
 }
 
@@ -50,4 +50,8 @@ tr:hover {
 
 Button {
     margin: 5px !important;
+}
+
+.inv-add-item-form {
+    margin-top: 10px;
 }

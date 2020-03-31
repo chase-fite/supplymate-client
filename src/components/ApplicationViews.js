@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import Login from './auth/Login'
 import Register from './auth/Register'
 import ItemList from './inventory/ItemList'
@@ -15,27 +15,39 @@ import SupplyRequestDetail from './supplyRequests/SupplyRequestDetail'
 class ApplicationViews extends Component {
 
     state = {
-        user: {}
+        role: ""
     }
 
     componentDidMount() {
-        this.setState({
-            user: JSON.parse(sessionStorage.getItem('user'))
-        })
+        const user = JSON.parse(sessionStorage.getItem('user'))
+        // console.log("user: ", user)
+        if(user !== null) {
+            this.setState({
+                role: user.role
+            })
+        }
+    }
+
+    updateAVState = () => {
+        console.log('updateAVState ran')
+        const user = JSON.parse(sessionStorage.getItem('user'))
+        if(user !== null) {
+            this.setState({
+                role: user.role
+            })
+        }
     }
 
     render() {
         return (
             <>
                 {
-                    (this.state.user === {})
+                    (this.state.role === "")
                     ?
-                    <></>
-                    :
                     <>
                         <Route
                             exact path="/login" render={props => {
-                                return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                return <Login refreshNavbar={this.props.refreshNavbar} updateAVState={this.updateAVState} {...props} />
                             }}
                         />
                         <Route
@@ -43,6 +55,9 @@ class ApplicationViews extends Component {
                                 return <Register refreshNavbar={this.props.refreshNavbar} {...props} />
                             }}
                         />
+                    </>
+                    :
+                    <>
                         <Route
                             exact path="/inventory" render={props => {
                                 if(isAuthenticated()) {
@@ -63,9 +78,9 @@ class ApplicationViews extends Component {
                         />
                         <Route
                             exact path="/inventory/addItem" render={props => {
-                                if(isAuthenticated() && this.state.user.role === "Logistics") {
+                                if(isAuthenticated() && this.state.role === "Logistics") {
                                     return <AddItemForm {...props} />
-                                } else if(isAuthenticated() && this.state.user.role === "Remote") {
+                                } else if(isAuthenticated() && this.state.role === "Remote") {
                                     return <></>
                                 } else {
                                     return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
@@ -74,9 +89,9 @@ class ApplicationViews extends Component {
                         />
                         <Route
                             exact path="/inventory/editItem/:itemId(\d+)" render={props => {
-                                if(isAuthenticated() && this.state.user.role === "Logistics") {
+                                if(isAuthenticated() && this.state.role === "Logistics") {
                                     return <EditItemForm {...props} />
-                                } else if(isAuthenticated() && this.state.user.role === "Remote") {
+                                } else if(isAuthenticated() && this.state.role === "Remote") {
                                     return <></>
                                 } else {
                                     return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
@@ -103,9 +118,9 @@ class ApplicationViews extends Component {
                         />
                         <Route
                             exact path="/supplyrequests/create" render={props => {
-                                if(isAuthenticated() && this.state.user.role === "Remote") {
+                                if(isAuthenticated() && this.state.role === "Remote") {
                                     return <CreateSupplyRequestForm {...props} />
-                                } else if(isAuthenticated() && this.state.user.role === "Logistics") {
+                                } else if(isAuthenticated() && this.state.role === "Logistics") {
                                     return <></>
                                 } else {
                                     return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
@@ -119,4 +134,4 @@ class ApplicationViews extends Component {
     }
 }
 
-export default ApplicationViews
+export default withRouter(ApplicationViews)

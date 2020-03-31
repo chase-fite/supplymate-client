@@ -54,6 +54,10 @@ class SupplyRequestCard extends Component {
         this.props.history.push(`/supplyrequests/${id}`)
     }
 
+    deleteSupplyRequest = () => {
+        
+    }
+
     render() {
         return (
             <Card className="sr-card">
@@ -87,9 +91,9 @@ class SupplyRequestCard extends Component {
                             <textarea className="sr-note" placeholder="Leave a note"></textarea>
                         </div>
                         <div className="sr-button">
-                            {/* <Button>Approve</Button>
-                            <Button>Modify</Button>
-                            <Button>Cancel</Button> */}
+                            <Button>Approve</Button>
+                            {/* <Button>Modify</Button> */}
+                            <Button>Cancel</Button>
                         </div>
                     </div>
                 </Card.Body>
