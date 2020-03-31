@@ -46,6 +46,11 @@ class ApplicationViews extends Component {
                     ?
                     <>
                         <Route
+                            exact path="/" render={props => {
+                                return <Login refreshNavbar={this.props.refreshNavbar} updateAVState={this.updateAVState} {...props} />
+                            }}
+                        />
+                        <Route
                             exact path="/login" render={props => {
                                 return <Login refreshNavbar={this.props.refreshNavbar} updateAVState={this.updateAVState} {...props} />
                             }}

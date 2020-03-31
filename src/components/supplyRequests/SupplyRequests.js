@@ -31,6 +31,19 @@ class SupplyRequests extends Component {
         this.props.history.push('/supplyrequests/create')
     }
 
+    deleteSupplyRequest = (id) => {
+        apiManager.delete('supplyrequests', id)
+        .then(response => {
+            let newSupplyRequestList = []
+            newSupplyRequestList = this.state.supplyRequests.filter(sr => {
+                return sr.id !== id
+            })
+            this.setState({
+                supplyRequests: newSupplyRequestList
+            })
+        })
+    }
+
     render() {
         return (
             <div className="sr-container">
@@ -50,6 +63,7 @@ class SupplyRequests extends Component {
                             key={indx}
                             supplyRequest={supplyRequest}
                             history={this.props.history}
+                            deleteSupplyRequest={this.deleteSupplyRequest}
                         />
                     )
                 })}
