@@ -2,72 +2,150 @@ import React, { Component } from 'react'
 import './SupplyRequests.css'
 import apiManager from '../utility/apiManager'
 import SupplyRequestCard from './SupplyRequestCard'
-import { Button } from 'react-bootstrap'
 
 
 class SupplyRequests extends Component {
 
     state = {
-        supplyRequests: [],
-        user: {}
+        supplyRequests: []
     }
 
     componentDidMount() {
-        apiManager.get('supplyrequests?status=pending')
-        .then(supplyrequests => {
-            // console.log('supply requests: ', supplyrequests)
-            this.setState({
-                supplyRequests: supplyrequests,
-                user: JSON.parse(sessionStorage.getItem('user'))
-            })
-        })
-    }
-
-    renderSupplyRequestDetails = () => {
-        this.props.history.push('/inventory')
-    }
-
-    renderCreateSupplyRequestForm = () => {
-        this.props.history.push('/supplyrequests/create')
+        switch (this.props.mode) {
+            case "Pending":
+                return (
+                    apiManager.get('supplyrequests?status=pending')
+                    .then(supplyRequests => {
+                        this.setState({
+                            supplyRequests: supplyRequests
+                        })
+                    })
+                )
+            case "Approved":
+                return (
+                    apiManager.get('supplyrequests?status=approved')
+                    .then(supplyRequests => {
+                        this.setState({
+                            supplyRequests: supplyRequests
+                        })
+                    })
+                )
+            case "Complete":
+                return (
+                    apiManager.get('supplyrequests?status=complete')
+                    .then(supplyRequests => {
+                        this.setState({
+                            supplyRequests: supplyRequests
+                        })
+                    })
+                )
+            default:
+                return <></>
+        }
     }
 
     deleteSupplyRequest = (id) => {
         apiManager.delete('supplyrequests', id)
         .then(response => {
-            let newSupplyRequestList = []
-            newSupplyRequestList = this.state.supplyRequests.filter(sr => {
+            let updatedSupplyRequestList = []
+            updatedSupplyRequestList = this.state.supplyRequests.filter(sr => {
                 return sr.id !== id
             })
             this.setState({
-                supplyRequests: newSupplyRequestList
+                supplyRequests: updatedSupplyRequestList
             })
         })
     }
 
+    changeSupplyRequestStatus = (id, statusId) => {
+
+        let updatedSupplyRequest = {}
+        this.state.supplyRequests.forEach(sr => {
+            if(sr.id === id) {
+                updatedSupplyRequest = {
+                    id: id,
+                    employee_id: sr.employee.id,
+                    address_id: sr.address.id,
+                    delivery_date_time: sr.delivery_date_time,
+                    items: sr.items,
+                    status_id: statusId,
+                }
+            }
+        })
+
+        apiManager.update('supplyrequests', updatedSupplyRequest, id)
+            .then(response => {
+                let updatedSupplyRequestList = []
+                updatedSupplyRequestList = this.state.supplyRequests.filter(sr =>{
+                    return sr.id !== id
+                })
+                this.setState({
+                    supplyRequests: updatedSupplyRequestList
+                })
+            })
+    }
+
+    display = () => {
+        switch (this.props.mode) {
+            case 'Pending':
+                return (
+                    <div className="sr-container">
+                        <h2 className="sr-title">Pending Supply Requests</h2>
+                        {this.state.supplyRequests.map((supplyRequest, indx) => {
+                            return (
+                                <SupplyRequestCard
+                                    key={indx}
+                                    supplyRequest={supplyRequest}
+                                    history={this.props.history}
+                                    deleteSupplyRequest={this.deleteSupplyRequest}
+                                    changeSupplyRequestStatus={this.changeSupplyRequestStatus}
+                                />
+                            )
+                        })}
+                    </div>
+                )
+            case 'Approved':
+                return (
+                    <div className="sr-container">
+                        <h2 className="sr-title">Approved Supply Requests</h2>
+                        {this.state.supplyRequests.map((supplyRequest, indx) => {
+                            return (
+                                <SupplyRequestCard
+                                    key={indx}
+                                    supplyRequest={supplyRequest}
+                                    history={this.props.history}
+                                    deleteSupplyRequest={this.deleteSupplyRequest}
+                                    changeSupplyRequestStatus={this.changeSupplyRequestStatus}
+                                />
+                            )
+                        })}
+                    </div>
+                )
+            case 'Complete':
+                return (
+                    <div className="sr-container">
+                        <h2 className="sr-title">Complete Supply Requests</h2>
+                        {this.state.supplyRequests.map((supplyRequest, indx) => {
+                            return (
+                                <SupplyRequestCard
+                                    key={indx}
+                                    supplyRequest={supplyRequest}
+                                    history={this.props.history}
+                                />
+                            )
+                        })}
+                    </div>
+                )
+            default:
+                return <></>
+        }
+    }
+
     render() {
         return (
-            <div className="sr-container">
-                <h2 className="sr-title">Pending Supply Requests</h2>
-                {
-                    (JSON.parse(sessionStorage.getItem('user')).role === "Remote")
-                    ?
-                    <Button onClick={this.renderCreateSupplyRequestForm}>Create Supply Request</Button>
-                    :
-                    <></>
-                }
-                
-
-                {this.state.supplyRequests.map((supplyRequest, indx) => {
-                    return (
-                        <SupplyRequestCard
-                            key={indx}
-                            supplyRequest={supplyRequest}
-                            history={this.props.history}
-                            deleteSupplyRequest={this.deleteSupplyRequest}
-                        />
-                    )
-                })}
-            </div>
+            <>
+                {this.display()}
+            </>
         )
     }
 }

@@ -87,9 +87,43 @@ class SupplyRequestCard extends Component {
                             <textarea className="sr-note" placeholder="Leave a note"></textarea>
                         </div>
                         <div className="sr-button">
-                            <Button>Approve</Button>
-                            {/* <Button>Modify</Button> */}
-                            <Button onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id)}>Cancel</Button>
+                            {
+                                (JSON.parse(sessionStorage.getItem('user')).role === "Logistics")
+                                ?
+                                <>
+                                    {
+                                        (this.props.supplyRequest.status.name === "Pending")
+                                        ?
+                                        <>
+                                            <Button onClick={() => this.props.changeSupplyRequestStatus(this.props.supplyRequest.id, 1)}>Approve</Button>
+                                            <Button onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id)}>Cancel</Button>
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                </>
+                                :
+                                <>
+                                    {
+                                        (this.props.supplyRequest.status.name === "Pending")
+                                        ?
+                                        <>
+                                            <Button onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id)}>Cancel</Button>
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                    {
+                                        (this.props.supplyRequest.status.name === "Approved")
+                                        ?
+                                        <>
+                                            <Button onClick={() => this.props.changeSupplyRequestStatus(this.props.supplyRequest.id, 3)}>Supplies Received</Button>
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                </>
+                            }
                         </div>
                     </div>
                 </Card.Body>

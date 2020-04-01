@@ -69,7 +69,7 @@ class CreateSupplyRequestForm extends Component {
         const hour = Number(time.split(':')[0])
         const minute = Number(time.split(':')[1])
         const newDate = new Date(month, day, year, hour, minute, 0, 0)
-        console.log('new date: ', newDate)
+        // console.log('new date: ', newDate)
 
         const user = JSON.parse(sessionStorage.getItem('user'))
         const newSupplyRequest = {
@@ -81,7 +81,7 @@ class CreateSupplyRequestForm extends Component {
 
         apiManager.post('supplyrequests', newSupplyRequest)
         .then(response => {
-            console.log('response from post: ', response)
+            // console.log('response from post: ', response)
 
             const promiseArray = []
             this.state.addedItems.forEach(item => {
@@ -94,6 +94,7 @@ class CreateSupplyRequestForm extends Component {
                 promiseArray.push(apiManager.post('supplyrequestitems', newSupplyRequestItemObject))
             })
             Promise.all(promiseArray)
+            this.props.history.push("/supplyrequests?status=pending")
         })
     }
 

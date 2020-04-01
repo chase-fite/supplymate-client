@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import apiManager from '../utility/apiManager'
 import './SupplyRequests.css'
 import { formatDateTime } from '../utility/dateTime'
@@ -18,17 +18,39 @@ class SupplyRequestDetail extends Component {
 
     componentDidMount() {
         apiManager.getOne('supplyrequests', this.props.match.params.supplyRequestId)
-            .then(supplyRequest => {
-                // console.log('supply request fetch: ', supplyRequest)
+        .then(supplyRequest => {
+
+            console.log('supplyRequest: ', supplyRequest)
+
+            apiManager.get(`supplyrequestitems?sr_id=${this.props.match.params.supplyRequestId}`)
+            .then(supplyRequestItems => {
+
+                console.log('supplyRequestItems: ', supplyRequestItems)
+
+                // we want to take the requested_quantity property from the supplyrequestitem object and
+                // add that to each item in our items list in state so that we can display it in the table
+                const updatedItemList = []
+                supplyRequest.items.forEach(item => {
+                    for(let i = 0; i < supplyRequestItems.length; i++) {
+                        if(item.id === supplyRequestItems[i].item.id) {
+                            const updatedItem = item
+                            updatedItem['requested_quantity'] = supplyRequestItems[i].requested_quantity
+                            updatedItemList.push(updatedItem)
+                            break
+                        }
+                    }
+                })
+
                 this.setState({
                     supplyRequest: supplyRequest,
-                    items: supplyRequest.items,
+                    items: updatedItemList,
                     delivery_date_time: supplyRequest.delivery_date_time,
                     address: supplyRequest.address,
                     status: supplyRequest.status,
-                    user: JSON.parse(sessionStorage.getItem('user'))
+                    user: supplyRequest.employee.user
                 })
             })
+        })
     }
 
     renderItemDetail = (id) => {
@@ -36,7 +58,7 @@ class SupplyRequestDetail extends Component {
     }
 
     render() {
-        console.log('state: ', this.state)
+        // console.log('srd state: ', this.state)
         return (
             <>
                 <h2 className="inv-title">Supply Request Details</h2>
@@ -60,8 +82,8 @@ class SupplyRequestDetail extends Component {
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>Stock</th>
-                            <th>Qty</th>
+                            <th>Qty.</th>
+                            <th>R.Q.</th>
                             <th>Name</th>
                             <th>SN</th>
                             <th>Price</th>
@@ -73,8 +95,8 @@ class SupplyRequestDetail extends Component {
                         {this.state.items.map(item => {
                             return (
                                 <tr key={item.id} onClick={() => this.renderItemDetail(item.id)}>
-                                    <td>{item.stock}</td>
                                     <td>{item.quantity}</td>
+                                    <td>{item.requested_quantity}</td>
                                     <td>{item.name}</td>
                                     <td>{item.serial_number}</td>
                                     <td>${item.price}</td>

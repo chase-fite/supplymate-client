@@ -15,12 +15,13 @@ class Register extends Component {
             "email": this.refs.email.value,
             "username": this.refs.userName.value,
             "password": this.refs.password.value,
-            "role_id": this.refs.roleId.value
+            "role_id": Number(this.refs.roleId.value)
         }
 
-        register(newUser, this.state.role_id)
+        register(newUser, Number(this.refs.roleId.value))
             .then(() => {
                 this.props.refreshNavbar()
+                this.props.updateAVState()
                 this.props.history.push("/inventory")
             })
     }
