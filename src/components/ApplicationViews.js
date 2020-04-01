@@ -15,12 +15,11 @@ import SupplyRequestDetail from './supplyRequests/SupplyRequestDetail'
 class ApplicationViews extends Component {
 
     state = {
-        role: ""
+        role: "",
     }
 
     componentDidMount() {
         const user = JSON.parse(sessionStorage.getItem('user'))
-        // console.log("user: ", user)
         if(user !== null) {
             this.setState({
                 role: user.role
@@ -29,7 +28,6 @@ class ApplicationViews extends Component {
     }
 
     updateAVState = () => {
-        console.log('updateAVState ran')
         const user = JSON.parse(sessionStorage.getItem('user'))
         if(user !== null) {
             this.setState({
@@ -57,7 +55,7 @@ class ApplicationViews extends Component {
                         />
                         <Route
                             exact path="/register" render={props => {
-                                return <Register refreshNavbar={this.props.refreshNavbar} {...props} />
+                                return <Register refreshNavbar={this.props.refreshNavbar} updateAVState={this.updateAVState} {...props} />
                             }}
                         />
                     </>
@@ -104,9 +102,30 @@ class ApplicationViews extends Component {
                             }}
                         />
                         <Route
-                            exact path="/supplyrequests" render={props => {
+                            exact path="/supplyrequests/pending" render={props => {
+                                const mode = "Pending"
                                 if(isAuthenticated()) {
-                                    return <SupplyRequests {...props} />
+                                    return <SupplyRequests mode={mode} {...props} />
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/supplyrequests/approved" render={props => {
+                                const mode = "Approved"
+                                if(isAuthenticated()) {
+                                    return <SupplyRequests mode={mode} {...props} />
+                                } else {
+                                    return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
+                                }
+                            }}
+                        />
+                        <Route
+                            exact path="/supplyrequests/complete" render={props => {
+                                const mode = "Complete"
+                                if(isAuthenticated()) {
+                                    return <SupplyRequests mode={mode} {...props} />
                                 } else {
                                     return <Login refreshNavbar={this.props.refreshNavbar} {...props} />
                                 }

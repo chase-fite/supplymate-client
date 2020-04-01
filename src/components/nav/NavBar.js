@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap'
 import { isAuthenticated, logout } from '../utility/simpleAuth'
 
 class NavBar extends Component {
@@ -17,7 +17,18 @@ class NavBar extends Component {
                             ?
                             <>
                                 <Nav.Link href="/inventory">Inventory</Nav.Link>
-                                <Nav.Link href="/supplyrequests">Supply Requests</Nav.Link>
+                                <NavDropdown title="Supply Requests" id="nav-dropdown">
+                                    <NavDropdown.Item href="/supplyrequests/pending">Pending</NavDropdown.Item>
+                                    <NavDropdown.Item href="/supplyrequests/approved">Approved</NavDropdown.Item>
+                                    <NavDropdown.Item href="/supplyrequests/complete">Complete</NavDropdown.Item>
+                                    {
+                                        (JSON.parse(sessionStorage.getItem('user')).role === "Remote")
+                                        ?
+                                        <NavDropdown.Item href="/supplyrequests/create">Create New</NavDropdown.Item>
+                                        :
+                                        <></>
+                                    }
+                                </NavDropdown>
                                 <Nav.Link onClick={logout} href="/login">Logout</Nav.Link>
                             </>
                             :
