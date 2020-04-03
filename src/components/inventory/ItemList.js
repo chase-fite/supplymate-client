@@ -40,6 +40,8 @@ class ItemList extends Component {
                     :
                     <></>
                 }
+                <div className="csr-rq-legend">Stock = Desired quantity on restock</div>
+                <div className="csr-rq-legend">Qty. = Quantity of items on hand</div>
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>

@@ -1,5 +1,4 @@
-import apiManager from "./apiManager"
-import { updateAVState } from '../ApplicationViews'
+
 
 const isAuthenticated = () => {
     return sessionStorage.getItem("supplymate_token") !== null
@@ -19,33 +18,9 @@ const login = (credentials) => {
             if ("valid" in res && res.valid && "token" in res) {
                 sessionStorage.setItem("supplymate_token", res.token)
                 sessionStorage.setItem("user", JSON.stringify({ id: res.id, employee_id: res.employee_id, role: res.role, first_name: res.first_name, last_name: res.last_name }))
-                // apiManager.get('employees')
-                //     .then(employees => {
-                //         let employee_id = null
-                //         let role = null
-                //         employees.forEach(employee => {
-                //             if (employee.user.id === res.id) {
-                //                 employee_id = employee.id
-                //                 role = employee.role.name
-                //             }
-                //         })
-                //         sessionStorage.setItem("user", JSON.stringify({ id: res.id, employee_id: employee_id, role: role, first_name: res.first_name, last_name: res.last_name }))
-                //     })
             } else {
                 window.alert('Please make sure you entered a valid username and password')
             }
-            // apiManager.get('employees')
-            // .then(employees => {
-            //     let employee_id = null
-            //     let role = null
-            //     employees.forEach(employee => {
-            //         if(employee.user.id === res.id) {
-            //             employee_id = employee.id
-            //             role = employee.role.name
-            //         }
-            //     })
-            //     sessionStorage.setItem("user", JSON.stringify({id: res.id, employee_id: employee_id, role: role, first_name: res.first_name, last_name: res.last_name}))
-            // })
         })
 }
 

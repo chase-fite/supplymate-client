@@ -8,3 +8,12 @@
 .col-sm-6 {
     padding-left: 0px !important;
 }
+
+.login-btn {
+    background-color: #3bb7ff !important;
+    border: 1px solid #3bb7ff !important;
+}
+
+.login-btn:hover {
+    background-color: #0097ed !important;
+}

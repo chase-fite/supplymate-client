@@ -164,8 +164,11 @@ class ManageAddresses extends Component {
                         if(this.props.returnToEditItem) {
                             this.props.returnToEditItem()
                         }
-                        else {
+                        else if(this.props.returnToAddItem) {
                             this.props.returnToAddItem()
+                        }
+                        else {
+                            this.props.history.push('/supplyrequests/create')
                         }
                     }}>Back</Button>
                 </Form>

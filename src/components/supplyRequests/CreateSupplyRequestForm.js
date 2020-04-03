@@ -39,7 +39,11 @@ class CreateSupplyRequestForm extends Component {
             let modifiedItemObject = this.state.items[i]
             modifiedItemObject['requested_quantity'] = Number(this.refs[i].value)
             if(Number(this.refs[i].value) !== 0 && !isNaN(Number(this.refs[i].value))) {
-                tempAddedItemsList.push(modifiedItemObject)
+                if(Number(this.refs[i].value) > Number(this.state.items[i].quantity)) {
+                    window.alert('Not enough items in stock for this request')    
+                } else {
+                    tempAddedItemsList.push(modifiedItemObject)
+                }
             } else if(isNaN(Number(this.refs[i].value))) {
                 window.alert('Please input a number for requested quantity')
                 tempAddedItemsList = []
@@ -62,13 +66,18 @@ class CreateSupplyRequestForm extends Component {
     submitSupplyRequest = () => {
         // console.log("datetime: ", this.refs['date'].value, this.refs['time'].value)
         const date = this.refs['date'].value
-        const month = Number(date.split('-')[0])
-        const day = Number(date.split('-')[1])
-        const year = Number(date.split('-')[2])
+        // console.log("date: ", date)
+        const month = Number(date.split('-')[1]) - 1
+        // console.log('month: ', month)
+        const day = Number(date.split('-')[2])
+        // console.log('day: ', day)
+        const year = Number(date.split('-')[0])
+        // console.log('year: ', year)
         const time = this.refs['time'].value
+        // console.log("time: ", time)
         const hour = Number(time.split(':')[0])
         const minute = Number(time.split(':')[1])
-        const newDate = new Date(month, day, year, hour, minute, 0, 0)
+        const newDate = new Date(year, month, day, hour, minute)
         // console.log('new date: ', newDate)
 
         const user = JSON.parse(sessionStorage.getItem('user'))
@@ -85,17 +94,36 @@ class CreateSupplyRequestForm extends Component {
 
             const promiseArray = []
             this.state.addedItems.forEach(item => {
-                console.log('item: ', item)
+                // console.log('item: ', item)
                 const newSupplyRequestItemObject = {
                     supply_request_id: response.id,
                     item_id: item.id,
                     requested_quantity: item.requested_quantity
                 }
                 promiseArray.push(apiManager.post('supplyrequestitems', newSupplyRequestItemObject))
+
+                const updatedItem = {
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    serial_number: item.serial_number,
+                    stock: item.stock,
+                    quantity: (Number(item.quantity) - Number(item.requested_quantity)),
+                    item_type_id: item.item_type.id,
+                    address_id: item.address.id,
+                    storage_location: item.storage_location,
+                    price: item.price
+                }
+                // console.log('updated item: ', updatedItem)
+                promiseArray.push(apiManager.update('items', updatedItem, item.id))
             })
             Promise.all(promiseArray)
-            this.props.history.push("/supplyrequests?status=pending")
+            .then(r => this.props.history.push("/supplyrequests/pending"))
         })
+    }
+
+    redirectToManageAddresses = () => {
+        this.props.history.push('/manageaddresses')
     }
 
     render() {
@@ -131,17 +159,20 @@ class CreateSupplyRequestForm extends Component {
                         )
                     })}
                 </div>
-                <Button onClick={this.submitSupplyRequest}>Submit</Button>
-                <Button>Manage Addresses</Button>
-                <Button onClick={this.clearAddedItems}>Clear Added Items</Button>
+                <Button className="sr-btn" onClick={this.submitSupplyRequest}>Submit</Button>
+                <Button className="sr-btn" onClick={this.redirectToManageAddresses}>Manage Addresses</Button>
+                <Button className="sr-btn" onClick={this.clearAddedItems}>Clear Added Items</Button>
 
                 <h2 className="inv-title">Inventory</h2>
-                <Button onClick={this.addItems}>Add Items</Button>
+                <Button className="sr-btn" onClick={this.addItems}>Add Items</Button>
+
+                <div className="csr-rq-legend">R.Q. = Requested Quantity</div>
+                <div className="csr-rq-legend">Qty. = Quantity of items on hand</div>
 
                 <div className="sr-add-item-container">
                     <div className="sr-add-button-input">
                         <div className="sr-table-header">
-                            <div>RQ</div>
+                            <div className="csr-rq">R.Q.</div>
                         </div>
                         {
                             this.state.items.map((item, indx) => {
@@ -154,8 +185,7 @@ class CreateSupplyRequestForm extends Component {
                     <Table striped bordered hover size="sm">
                         <thead>
                             <tr>
-                                <th>Stock</th>
-                                <th>Qty</th>
+                                <th>Qty.</th>
                                 <th>Name</th>
                                 <th>SN</th>
                                 <th>Price</th>
@@ -166,7 +196,6 @@ class CreateSupplyRequestForm extends Component {
                             {this.state.items.map(item => {
                                 return (
                                     <tr key={item.id} onClick={() => this.renderItemDetail(item.id)}>
-                                        <td>{item.stock}</td>
                                         <td>{item.quantity}</td>
                                         <td>{item.name}</td>
                                         <td>{item.serial_number}</td>
