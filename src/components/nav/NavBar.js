@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap'
 import { isAuthenticated, logout } from '../utility/simpleAuth'
+import './NavBar.css'
 
 class NavBar extends Component {
 
@@ -11,8 +12,8 @@ class NavBar extends Component {
     render() {
         return (
             <>
-                <Navbar sticky="top" bg="primary" variant="dark">
-                    <Nav className="mr-auto">
+                <Navbar sticky="top" variant="dark" className="navbar">
+                    <Nav>
                         {(isAuthenticated())
                             ?
                             <>
@@ -35,9 +36,12 @@ class NavBar extends Component {
                             <Nav.Link href="/login">Login</Nav.Link>
                         }
                     </Nav>
+                    <Nav>
+                        <div className="nav-title">SupplyMate</div>
+                    </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-light">Search</Button>
+                        <Button className="nav-search-btn" variant="outline-light">Search</Button>
                     </Form>
                 </Navbar>
             </>

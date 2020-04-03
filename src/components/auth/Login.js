@@ -39,7 +39,7 @@ class Login extends Component {
                         </Col>
                     </Form.Group>
 
-                    <Button onClick={this.handleLogin} variant="primary" type="submit">
+                    <Button className="login-btn" onClick={this.handleLogin} type="submit">
                         Submit
                     </Button>
                 </Form>

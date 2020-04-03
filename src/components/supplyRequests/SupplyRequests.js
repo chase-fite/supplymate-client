@@ -44,7 +44,34 @@ class SupplyRequests extends Component {
         }
     }
 
-    deleteSupplyRequest = (id) => {
+    deleteSupplyRequest = (id, itemList) => {
+
+        this.state.supplyRequests.forEach(sr => {
+            if(sr.id === id) {
+                const promiseArray = []
+
+                sr.items.forEach((item, indx) => {
+                    // console.log('item: ', item)
+                    // console.log('itemList item: ', itemList[indx])
+                    
+                    const updatedItem = {
+                        id: item.id,
+                        name: item.name,
+                        description: item.description,
+                        serial_number: item.serial_number,
+                        stock: item.stock,
+                        quantity: (Number(item.quantity) + Number(itemList[indx].requested_quantity)),
+                        item_type_id: item.item_type.id,
+                        address_id: item.address.id,
+                        storage_location: item.storage_location,
+                        price: item.price
+                    }
+                    promiseArray.push(apiManager.update('items', updatedItem, item.id))
+                })
+                Promise.all(promiseArray)
+            }
+        })
+
         apiManager.delete('supplyrequests', id)
         .then(response => {
             let updatedSupplyRequestList = []

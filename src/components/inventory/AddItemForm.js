@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Button, Form, Col, Row } from 'react-bootstrap'
 import apiManager from '../utility/apiManager'
 import './Inventory.css'
-import deloImage from '../../images/delo-400.jpeg'
 import ManageAddresses from './ManageAddresses'
 import ManageItemTypes from './ManageItemTypes'
 
@@ -183,8 +182,8 @@ class AddItemForm extends Component {
                                 </Col>
                             </Form.Group>
 
-                            <Button onClick={this.handleAddItem}>Save</Button>
-                            <Button onClick={() => this.props.history.push('/inventory')}>Back</Button>
+                            <Button className="item-detail-btn" onClick={this.handleAddItem}>Save</Button>
+                            <Button className="item-detail-btn" onClick={() => this.props.history.push('/inventory')}>Back</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddAddress}>Add Address</Button>
                             <Button className="item-detail-btn" onClick={this.renderAddItemType}>Add Item Type</Button>
                         </Form>

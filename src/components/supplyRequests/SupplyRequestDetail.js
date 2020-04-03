@@ -20,12 +20,12 @@ class SupplyRequestDetail extends Component {
         apiManager.getOne('supplyrequests', this.props.match.params.supplyRequestId)
         .then(supplyRequest => {
 
-            console.log('supplyRequest: ', supplyRequest)
+            // console.log('supplyRequest: ', supplyRequest)
 
             apiManager.get(`supplyrequestitems?sr_id=${this.props.match.params.supplyRequestId}`)
             .then(supplyRequestItems => {
 
-                console.log('supplyRequestItems: ', supplyRequestItems)
+                // console.log('supplyRequestItems: ', supplyRequestItems)
 
                 // we want to take the requested_quantity property from the supplyrequestitem object and
                 // add that to each item in our items list in state so that we can display it in the table

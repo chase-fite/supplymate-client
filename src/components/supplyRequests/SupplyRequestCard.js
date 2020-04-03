@@ -66,7 +66,7 @@ class SupplyRequestCard extends Component {
                     <div className="src-header-address">Address: {this.props.supplyRequest.address.street}, {this.props.supplyRequest.address.city}, {this.props.supplyRequest.address.state} {this.props.supplyRequest.address.zip_code}</div>
                 </Card.Header>
                 <Card.Body className="sr-card-body">
-                    <div className="sr-click-notice" onClick={() => this.renderSupplyRequestDetails(this.state.supplyRequest.id)}>(Click for supply request details)</div>
+                    <div className="sr-click-notice" onClick={() => this.renderSupplyRequestDetails(this.state.supplyRequest.id)}>Click for supply request details</div>
                     <div className="sr-item-container" onClick={() => this.renderSupplyRequestDetails(this.state.supplyRequest.id)}>
                         {this.state.itemCols.map((col, indx) => {
                             return (
@@ -95,8 +95,17 @@ class SupplyRequestCard extends Component {
                                         (this.props.supplyRequest.status.name === "Pending")
                                         ?
                                         <>
-                                            <Button onClick={() => this.props.changeSupplyRequestStatus(this.props.supplyRequest.id, 1)}>Approve</Button>
-                                            <Button onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id)}>Cancel</Button>
+                                            <Button className="sr-btn" onClick={() => this.props.changeSupplyRequestStatus(this.props.supplyRequest.id, 1)}>Approve</Button>
+                                            <Button className="sr-btn" onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id, this.state.items)}>Cancel</Button>
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                    {
+                                        (this.props.supplyRequest.status.name === "Approved")
+                                        ?
+                                        <>
+                                            <Button className="sr-btn" onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id, this.state.items)}>Cancel</Button>
                                         </>
                                         :
                                         <></>
@@ -108,7 +117,7 @@ class SupplyRequestCard extends Component {
                                         (this.props.supplyRequest.status.name === "Pending")
                                         ?
                                         <>
-                                            <Button onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id)}>Cancel</Button>
+                                            <Button className="sr-btn" onClick={() => this.props.deleteSupplyRequest(this.props.supplyRequest.id, this.state.items)}>Cancel</Button>
                                         </>
                                         :
                                         <></>
@@ -117,7 +126,7 @@ class SupplyRequestCard extends Component {
                                         (this.props.supplyRequest.status.name === "Approved")
                                         ?
                                         <>
-                                            <Button onClick={() => this.props.changeSupplyRequestStatus(this.props.supplyRequest.id, 3)}>Supplies Received</Button>
+                                            <Button className="sr-btn" onClick={() => this.props.changeSupplyRequestStatus(this.props.supplyRequest.id, 3)}>Supplies Received</Button>
                                         </>
                                         :
                                         <></>

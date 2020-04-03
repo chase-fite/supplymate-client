@@ -76,7 +76,7 @@ class Register extends Component {
                         </Col>
                     </Form.Group>
                     
-                    <Button onClick={this.handleRegister} variant="primary" type="submit">
+                    <Button className="login-btn" onClick={this.handleRegister} type="submit">
                         Submit
                     </Button>
                 </Form>
