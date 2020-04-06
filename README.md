@@ -12,7 +12,7 @@
 
 ## API
 
-Please also clone down the back-end part of this app and follow the instructions for setting up django for the full experience of this app.
+Please also clone down the back-end part of this app and follow the instructions for setting up the API to be able to fully run the application
 
 https://github.com/chase-fite/supplymate-api
 
