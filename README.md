@@ -12,7 +12,7 @@
 
 ## API
 
-Please also clone down the back-end part of this app and follow the instructions for setting up the API to be able to fully run the application
+Please also clone down the back-end part of this app and follow the instructions for setting up the API
 
 https://github.com/chase-fite/supplymate-api
 
