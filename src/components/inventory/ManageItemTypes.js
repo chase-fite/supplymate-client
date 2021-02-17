@@ -90,7 +90,7 @@ class ManageAddresses extends Component {
 
     render() {
         return (
-            <>
+            <div className="manage-item-type">
                 <Table striped bordered hover size="sm">
                     <thead className="table-bottom-margin">
                         <tr>
@@ -112,17 +112,17 @@ class ManageAddresses extends Component {
                 </Table>
                 <Button className="item-detail-btn" onClick={() => this.handleDeleteItemType(this.state.selectedItemTypeId)}>Delete Item Type</Button>
 
-                <h2 className="inv-title">Add Item Type</h2>
                 <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="2">
-                            Item Type
-                        </Form.Label>
-                        <Col sm="6">
+                    <h2 className="inv-title">Add Item Type</h2>
+                    <div className="add-item-type">
+                        <div className="add-item-type__label">
+                            <div>Item Type</div>
+                        </div>
+                        <div className="add-item-type__input">
                             <Form.Control type="text" ref="name" />
-                        </Col>
-                    </Form.Group>
 
+                        </div>
+                    </div>
                     <Button className="item-detail-btn" onClick={this.handleAddItemType}>Save</Button>
                     <Button className="item-detail-btn" onClick={() => {
                         if(this.props.returnToEditItem) {
@@ -133,7 +133,7 @@ class ManageAddresses extends Component {
                         }
                     }}>Back</Button>
                 </Form>
-            </>
+            </div>
         )
     }
 }

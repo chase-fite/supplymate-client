@@ -48,10 +48,52 @@ class ItemDetail extends Component {
     render() {
         return (
             <>
-                <div className="flex">
-                    <div>
-                        <img className="image" src={deloImage} alt="delo 400" />
+                <div className="item-detail">
+                    <div className="flex">
+                        <div>
+                            <img className="image" src={deloImage} alt="delo 400" />
+                        </div>
                     </div>
+                    <Table striped bordered hover size="sm">
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td>{this.state.name}</td>
+                            </tr>
+                            <tr>
+                                <td>Stock</td>
+                                <td>{this.state.stock}</td>
+                            </tr>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>{this.state.quantity}</td>
+                            </tr>
+                            <tr>
+                                <td>Type</td>
+                                <td>{this.state.type.name}</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>{this.state.description}</td>
+                            </tr>
+                            <tr>
+                                <td>Serial Number</td>
+                                <td>{this.state.serialNumber}</td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>${this.state.price}</td>
+                            </tr>
+                            <tr>
+                                <td>Storage Location</td>
+                                <td>{this.state.storageLocation}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>{this.state.address.street}, {this.state.address.city}, {this.state.address.state} {this.state.address.zip_code}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                     <div className="flex item-detail-btn-container">
                         {
                             (JSON.parse(sessionStorage.getItem('user')).role === "Logistics")
@@ -65,47 +107,6 @@ class ItemDetail extends Component {
                         }
                     </div>
                 </div>
-
-                <Table striped bordered hover size="sm">
-                    <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>{this.state.name}</td>
-                        </tr>
-                        <tr>
-                            <td>Stock</td>
-                            <td>{this.state.stock}</td>
-                        </tr>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>{this.state.quantity}</td>
-                        </tr>
-                        <tr>
-                            <td>Type</td>
-                            <td>{this.state.type.name}</td>
-                        </tr>
-                        <tr>
-                            <td>Description</td>
-                            <td>{this.state.description}</td>
-                        </tr>
-                        <tr>
-                            <td>Serial Number</td>
-                            <td>{this.state.serialNumber}</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>${this.state.price}</td>
-                        </tr>
-                        <tr>
-                            <td>Storage Location</td>
-                            <td>{this.state.storageLocation}</td>
-                        </tr>
-                        <tr>
-                            <td>Address</td>
-                            <td>{this.state.address.street}, {this.state.address.city}, {this.state.address.state} {this.state.address.zip_code}</td>
-                        </tr>
-                    </tbody>
-                </Table>
             </>
         )
     }

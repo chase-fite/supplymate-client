@@ -89,103 +89,45 @@ class AddItemForm extends Component {
                         </div> */}
 
                         <Form className="inv-add-item-form">
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Name
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="name" />
-                                </Col>
-                            </Form.Group>
+                            <div className="inv-add-item-form__labels">
+                                <div>Name</div>
+                                <div>Stock</div>
+                                <div>Quantity</div>
+                                <div>Type</div>
+                                <div></div>
+                                <div>Description</div>
+                                <div>Serial Number</div>
+                                <div>Price</div>
+                                <div>Storage Location</div>
+                                <div>Address</div>
+                            </div>
+                            <div className="inv-add-item-form__inputs">    
+                                <Form.Control type="text" ref="name" />
+                                <Form.Control type="text" ref="stock" />
+                                <Form.Control type="text" ref="quantity" />
+                                <select className="address-select" ref="itemTypeId">
+                                    {this.state.itemTypeList.map(itemType => {
+                                        return (
+                                            <option key={itemType.id} value={itemType.id}>{itemType.name}</option>
+                                        )
+                                    })}
+                                </select>
+                                <Button className="item-detail-btn" onClick={this.renderAddItemType}>Add Item Type</Button>
+                                <Form.Control type="text" ref="description" />
+                                <Form.Control type="text" ref="serialNumber" />
+                                <Form.Control type="text" ref="price" />
+                                <Form.Control type="text" ref="storageLocation" />
+                                <select className="address-select" ref="addressId">
+                                    {this.state.addressList.map(address => {
+                                        return (
+                                            <option key={address.id} value={address.id}>{address.street}, {address.city}, {address.state} {address.zip_code}</option>
+                                        )
+                                    })}
+                                </select>
 
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Stock
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="stock" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Quantity
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="quantity" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Type
-                                </Form.Label>
-                                <Col sm="6">
-                                    <select className="address-select" ref="itemTypeId">
-                                        {this.state.itemTypeList.map(itemType => {
-                                            return (
-                                                <option key={itemType.id} value={itemType.id}>{itemType.name}</option>
-                                            )
-                                        })}
-                                    </select>
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Description
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="description" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Serial Number
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="serialNumber" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Price
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="price" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Storage Location
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="text" ref="storageLocation" />
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row}>
-                                <Form.Label column sm="2">
-                                    Address
-                                </Form.Label>
-                                <Col sm="6">
-                                    <select className="address-select" ref="addressId">
-                                        {this.state.addressList.map(address => {
-                                            return (
-                                                <option key={address.id} value={address.id}>{address.street}, {address.city}, {address.state} {address.zip_code}</option>
-                                            )
-                                        })}
-                                    </select>
-                                </Col>
-                            </Form.Group>
-
-                            <Button className="item-detail-btn" onClick={this.handleAddItem}>Save</Button>
-                            <Button className="item-detail-btn" onClick={() => this.props.history.push('/inventory')}>Back</Button>
-                            <Button className="item-detail-btn" onClick={this.renderAddAddress}>Add Address</Button>
-                            <Button className="item-detail-btn" onClick={this.renderAddItemType}>Add Item Type</Button>
+                                <Button className="item-detail-btn" onClick={this.renderAddAddress}>Add Address</Button>
+                                <Button className="item-detail-btn" onClick={this.handleAddItem}>Save</Button>
+                            </div>
                         </Form>
                     </>
                 )
