@@ -18,11 +18,13 @@ class Register extends Component {
             "role_id": Number(this.refs.roleId.value)
         }
 
+        console.log('newUser: ', newUser);
+
         register(newUser, Number(this.refs.roleId.value))
             .then(() => {
                 this.props.refreshNavbar()
                 this.props.updateAVState()
-                this.props.history.push("/inventory")
+                this.props.history.push("/login")
             })
     }
 

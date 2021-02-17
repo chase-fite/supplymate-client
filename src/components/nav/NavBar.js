@@ -23,7 +23,7 @@ class NavBar extends Component {
                                     <NavDropdown.Item href="/supplyrequests/approved">Approved</NavDropdown.Item>
                                     <NavDropdown.Item href="/supplyrequests/complete">Complete</NavDropdown.Item>
                                     {
-                                        (JSON.parse(sessionStorage.getItem('user')).role === "Remote")
+                                        (sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user')).role === "Remote")
                                         ?
                                         <NavDropdown.Item href="/supplyrequests/create">Create New</NavDropdown.Item>
                                         :

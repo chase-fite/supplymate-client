@@ -40,7 +40,7 @@ class Login extends Component {
                     </Form.Group>
 
                     <Button className="login-btn" onClick={this.handleLogin} type="submit">
-                        Submit
+                        Login
                     </Button>
                 </Form>
 

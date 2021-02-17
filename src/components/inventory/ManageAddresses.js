@@ -94,84 +94,65 @@ class ManageAddresses extends Component {
     render() {
         return (
             <>
-                <Table striped bordered hover size="sm">
-                    <thead className="table-bottom-margin">
-                        <tr>
-                            <th>Street</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Zip Code</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.addressList.map((address, indx) => {
-                            return (
-                                <tr className={this.state.rowClassNameList[indx]} key={address.id} onClick={() => {
-                                    this.updateClassNameList(indx)
-                                    this.setState({ selectedAddressId: address.id })
-                                }}>
-                                    <td>{address.street}</td>
-                                    <td>{address.city}</td>
-                                    <td>{address.state}</td>
-                                    <td>{address.zip_code}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </Table>
-                <Button className="item-detail-btn" onClick={() => this.handleDeleteAddress(this.state.selectedAddressId)}>Delete Address</Button>
+                <div className="manage-addresses">
+                    <Table striped bordered hover size="sm">
+                        <thead className="table-bottom-margin">
+                            <tr>
+                                <th>Street</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.addressList.map((address, indx) => {
+                                return (
+                                    <tr className={this.state.rowClassNameList[indx]} key={address.id} onClick={() => {
+                                        this.updateClassNameList(indx)
+                                        this.setState({ selectedAddressId: address.id })
+                                    }}>
+                                        <td>{address.street}</td>
+                                        <td>{address.city}</td>
+                                        <td>{address.state}</td>
+                                        <td>{address.zip_code}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                    <Button className="item-detail-btn" onClick={() => this.handleDeleteAddress(this.state.selectedAddressId)}>Delete Address</Button>
 
-                <h2 className="inv-title">Add Address</h2>
-                <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="2">
-                            Street
-                        </Form.Label>
-                        <Col sm="6">
-                            <Form.Control type="text" ref="street" />
-                        </Col>
-                    </Form.Group>
+                    <h2 className="inv-title">Add Address</h2>
+                    <Form>
+                        <div className="add-address__labels-inputs">
+                            <div className="add-address__labels">
+                                <div>Street</div>
+                                <div>City</div>
+                                <div>State</div>
+                                <div>Zip Code</div>
+                            </div>
+                            <div className="add-address__inputs">
+                                <Form.Control type="text" ref="street" />
+                                <Form.Control type="text" ref="city" />
+                                <Form.Control type="text" ref="state" />
+                                <Form.Control type="text" ref="zipCode" />
+                            </div>
+                        </div>
 
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="2">
-                            City
-                        </Form.Label>
-                        <Col sm="6">
-                            <Form.Control type="text" ref="city" />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="2">
-                            State
-                        </Form.Label>
-                        <Col sm="6">
-                            <Form.Control type="text" ref="state" />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="2">
-                            Zip Code
-                        </Form.Label>
-                        <Col sm="6">
-                            <Form.Control type="text" ref="zipCode" />
-                        </Col>
-                    </Form.Group>
-
-                    <Button className="item-detail-btn" onClick={this.handleAddAddress}>Save</Button>
-                    <Button className="item-detail-btn" onClick={() => {
-                        if(this.props.returnToEditItem) {
-                            this.props.returnToEditItem()
-                        }
-                        else if(this.props.returnToAddItem) {
-                            this.props.returnToAddItem()
-                        }
-                        else {
-                            this.props.history.push('/supplyrequests/create')
-                        }
-                    }}>Back</Button>
-                </Form>
+                        <Button className="item-detail-btn" onClick={this.handleAddAddress}>Save</Button>
+                        <Button className="item-detail-btn" onClick={() => {
+                            if(this.props.returnToEditItem) {
+                                this.props.returnToEditItem()
+                            }
+                            else if(this.props.returnToAddItem) {
+                                this.props.returnToAddItem()
+                            }
+                            else {
+                                this.props.history.push('/supplyrequests/create')
+                            }
+                        }}>Back</Button>
+                    </Form>
+                </div>
             </>
         )
     }
